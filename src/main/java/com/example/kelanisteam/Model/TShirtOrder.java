@@ -2,7 +2,7 @@ package com.example.kelanisteam.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import java.util.Date;
 @Document(collection = "tshirt_orders")
 public class TShirtOrder {
 
@@ -17,6 +17,7 @@ public class TShirtOrder {
     private String paymentMethod;
     private String paymentAmount;
     private String imageUrl;
+    private Date createdDate;
 
     // Constructors, getters, setters
 
@@ -117,5 +118,13 @@ public class TShirtOrder {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

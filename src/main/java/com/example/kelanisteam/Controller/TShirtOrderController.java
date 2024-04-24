@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Date;
+import java.util.Comparator;
+
 
 @RestController
 @RequestMapping("/tshirt-orders")
@@ -22,15 +25,33 @@ public class TShirtOrderController {
     }
 
     @GetMapping("/getAll")
-    public List<TShirtOrder> getAllTShirtOrders() {
-        return tShirtOrderService.getAllTShirtOrders();
+    public ResponseEntity<List<TShirtOrder>> getAllTShirtOrders() {
+        List<TShirtOrder> allTShirtOrders = tShirtOrderService.getAllTShirtOrders();
+
+        // Sort the list by createdDate in descending order (latest orders first)
+        allTShirtOrders.sort(Comparator.comparing(TShirtOrder::getCreatedDate).reversed());
+
+        if (!allTShirtOrders.isEmpty()) {
+            return ResponseEntity.ok(allTShirtOrders);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
+
+
+
+
 
     @PostMapping("/addTShirtOrder")
     public ResponseEntity<TShirtOrder> createTShirtOrder(@RequestBody TShirtOrder tShirtOrder) {
+        // Set the createdDate property to the current date
+        tShirtOrder.setCreatedDate(new Date());
+
         TShirtOrder savedTShirtOrder = tShirtOrderService.saveTShirtOrder(tShirtOrder);
         return new ResponseEntity<>(savedTShirtOrder, HttpStatus.CREATED);
     }
+
+
 
     // Add more endpoints as needed
 }
