@@ -24,4 +24,8 @@ public class BookingService {
     public Booking createBooking(Booking booking) {
         return bookingRepository.save(booking);
     }
+
+//    public Booking getBookingById(String id) {
+//        return bookingRepository.findById(String id);
+//    }
 }

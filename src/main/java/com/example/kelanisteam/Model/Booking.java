@@ -21,7 +21,7 @@ public class Booking {
     private String proposalLink;
 
     private String other;
-    private Date bookingDate;
+    private String bookingDate;
 
     // Constructors, getters, setters
 
@@ -30,7 +30,7 @@ public class Booking {
     }
 
     public Booking(String name, String university, String event, String email, String mobile,
-                   String description, String expectation, String whatWeGet, String proposalLink, String other) {
+                   String description, String expectation, String whatWeGet, String proposalLink, String other, String bookingDate) {
         this.name = name;
         this.university = university;
         this.event = event;
@@ -40,7 +40,7 @@ public class Booking {
         this.expectation = expectation;
         this.whatWeGet = whatWeGet;
         this.proposalLink = proposalLink;
-        this.bookingDate = new Date(); // Automatically set the booking date
+        this.bookingDate = bookingDate;
         this.other = other;
     }
 
@@ -126,11 +126,11 @@ public class Booking {
         this.proposalLink = proposalLink;
     }
 
-    public Date getBookingDate() {
+    public String getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
+    public void setBookingDate(String bookingDate) {
         this.bookingDate = bookingDate;
     }
 
