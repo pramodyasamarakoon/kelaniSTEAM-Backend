@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
-@Document(collection = "albums")
+@Document(collection = "Albums")
 public class Album {
 
     @Id
