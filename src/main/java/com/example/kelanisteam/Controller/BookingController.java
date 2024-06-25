@@ -1,5 +1,5 @@
 package com.example.kelanisteam.controller;
-
+import java.text.SimpleDateFormat;
 import com.example.kelanisteam.model.Booking;
 import com.example.kelanisteam.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,20 @@ public class BookingController {
 
     @PostMapping("/createBooking")
     public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
-        // Set the bookingDate property to the current date and time
-        booking.setBookingDate(new Date());
+        // Get the current date and time
+        Date currentDate = new Date();
+
+        // Format the date to "yyyy-MM-dd HH:mm:ss"
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = formatter.format(currentDate);
+
+        // Set the bookingDate property
+        booking.setBookingDate(formattedDate);
 
         Booking savedBooking = bookingService.createBooking(booking);
         return new ResponseEntity<>(savedBooking, HttpStatus.CREATED);
     }
+
 
     @GetMapping("/getAllBookings")
     public ResponseEntity<List<Booking>> getAllBookings() {
@@ -41,4 +49,15 @@ public class BookingController {
             return ResponseEntity.noContent().build();
         }
     }
+
+//    @GetMapping("/getBookingById/{id}")
+//    public ResponseEntity<Booking> getBookingById(@PathVariable String id) {
+//        Booking booking = bookingService.getBookingById(id);
+//
+//        if (booking != null) {
+//            return ResponseEntity.ok(booking);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }
